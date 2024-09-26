@@ -41,5 +41,5 @@ pubs_50%>%
   geom_text_repel(aes(label = pub_name), size = 3, max.overlaps = Inf)+
   theme_classic()
 ```
-[plot]plot.jpg
+[plot]plot1.jpg
 
