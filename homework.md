@@ -43,3 +43,35 @@ pubs_50%>%
 ```
 ![plot](plot1.jpg)
 
+## Task 2
+```{r}
+mad_data <- read.csv('https://raw.githubusercontent.com/vydra-v-getrax/intro_to_r/main/assignment1/mad_questionary.csv')
+```
+
+##### Switching everything to lowercase
+```{r}
+mad_data <- mad_data %>% 
+  mutate(sex = tolower(sex))
+```
+##### I'm using regular expressions for cleaning the data
+```{r}
+mad_data$sex <- sub("^ж.*$", "женский", mad_data$sex)
+mad_data$sex <- sub("^м.*$", "мужской", mad_data$sex)
+```
+
+##### Fixing the issues I found in the age column
+```{r}
+mad_data$age <- sub("18 лет", 18, mad_data$age)
+mad_data <- mad_data %>% 
+  mutate(age = as.numeric(age))
+```
+
+##### Plot
+```{r}
+mad_data %>% 
+  ggplot(aes(x = age, fill = sex))+
+  geom_dotplot(method = 'histodot', binwidth = 2, binpositions = all)+
+  scale_x_continuous(limits = c(1, 100))+
+  scale_y_continuous(NULL, breaks = NULL)
+```
+![plot](plot2.jpg)
